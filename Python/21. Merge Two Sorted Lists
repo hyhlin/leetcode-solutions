@@ -1,0 +1,50 @@
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        
+        #initialize
+        
+        head = ListNode(0)
+        pointer = head
+        
+        """
+        3 base cases:
+        if both lists are empty, return
+        if list 1 is empty, plug in the rest of list 2
+        if list 2 is empty, plug in the rest of list 1
+        """
+        
+        while True:
+            if l1 is None and l2 is None:
+                break
+            elif l1 is None:
+                pointer.next = l2
+                break
+            elif l2 is None:
+                pointer.next = l1
+                break
+                
+            """
+            set temp variable called smallerVal
+            check if l1 is smaller
+            check if l2 is smaller
+            move pointers
+            """
+            
+            else:
+                smallerVal = 0
+                if l1.val < l2.val:
+                    smallerVal = l1.val
+                    l1 = l1.next
+                else:
+                    smallerVal = l2.val
+                    l2 = l2.next
+                newNode = ListNode(smallerVal)
+                pointer.next = newNode
+                pointer = pointer.next
+                
+        return head.next
